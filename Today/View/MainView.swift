@@ -35,8 +35,8 @@ struct MainView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
             
-            Text("앱 개발 10분이라도 했음;;")
-            Text("책 한 구절 읽음")
+            Text("앱 출시")
+            Text("일단 해보기의 기술 읽기")
 
             
             
@@ -56,14 +56,24 @@ struct MainView_Previews: PreviewProvider {
 extension MainView {
     var todayTimer: some View {
         VStack {
-            VStack {
-                Text("남은돈")
-                
-                Text("\(dif.hour ?? 0):\(dif.minute ?? 0):\(dif.second ?? 0)")
-                    .fontWeight(.semibold)
+            HStack {
+                VStack {
+                    Text("남은시간")
 
+                    Text("\(dif.hour ?? 0):\(dif.minute ?? 0):\(dif.second ?? 0)")
+                        .fontWeight(.semibold)
+
+                }
+                .frame(width: 100)
+                
+                VStack {
+                    Text("인타임(m)")
+
+                    Text("\(getMoney())")
+
+                }
+                .frame(width: 100)
             }
-            .frame(width: 100)
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.horizontal, 50)
@@ -72,5 +82,9 @@ extension MainView {
         }
     }
     
+    func getMoney() -> Int {
+        let money = (dif.hour ?? 0) * 9620 + (dif.minute ?? 0) * 160
+        return money
+    }
     
 }
