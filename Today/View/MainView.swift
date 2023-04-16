@@ -10,6 +10,8 @@ import SwiftUI
 struct MainView: View {
     
     @State var now = Date()
+    @State var showOnboarding: Bool = true
+    
     
     var dif: DateComponents {
         let cal = Calendar.current
@@ -28,26 +30,31 @@ struct MainView: View {
     }
     
     var body: some View {
-        VStack(spacing: 30) {
-            todayTimer
-            
-            Text("오늘 한 일")
-                .font(.title2)
-                .fontWeight(.semibold)
-            
-            Text("앱 출시")
-            Text("일단 해보기의 기술 읽기")
-
-            
-            
-            Spacer()
-            
+        
+        VStack {
+            if showOnboarding {
+                OnboardingView(showOnboarding: $showOnboarding)
+            } else {
+                VStack(spacing: 30) {
+                    todayTimer
+                    
+                    Text("오늘 한 일")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    
+                    Text("앱 출시")
+                    Text("일단 해보기의 기술 읽기")
+                    
+                    Spacer()
+                }
+        }
         }
     }
 }
     
 
 struct MainView_Previews: PreviewProvider {
+    static var showOnboarding: Bool = true
     static var previews: some View {
         MainView()
     }
